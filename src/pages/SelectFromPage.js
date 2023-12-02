@@ -1,9 +1,9 @@
-
+import Spotify from "../components/Spotify"
 
 
 const SelectFromPage = () => {
   return (
-    <div>SelectFromPage</div>
+    <div className="flex justify-center"><Spotify/></div>
   )
 }
 
