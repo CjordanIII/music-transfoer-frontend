@@ -1,8 +1,9 @@
 import spotifyAuthData from "../services/spotifyAuthData";
-
+import organizeSpotifyApi from "./organizeSpotifyApi";
 const handleSpotify = async()=>{
     
-    spotifyAuthData();
+    const spotifyPlaylist = await spotifyAuthData();
+    organizeSpotifyApi(spotifyPlaylist);
     
     
 }
