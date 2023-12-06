@@ -1,7 +1,20 @@
-
-
-const organizeSpotifyApi = (data) => {
-    console.log(data)
+const organizeSpotifyApi =async (data) => {
+   let songArr = [];
+ 
+for (let i = 0; i < data.playlistName.length; i++) {
+  let spotifyData = {
+    playlist: {
+      playlistName: data.playlistName[i],
+      songsOnPlaylist: {
+        songs: data.songName[i],
+        artist: data.artist[i][i],
+      },
+    },
+  };
+  songArr.push(spotifyData);
 }
-//!Where I left off
-export default organizeSpotifyApi
+
+return songArr;
+}
+
+export default organizeSpotifyApi;
