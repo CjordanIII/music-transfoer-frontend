@@ -1,16 +1,45 @@
 
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import SpoitfyIcon from '../icons/SpoitfyIcon';
+import { addSpotifyData } from '../slices/spotify';
 import handleSpotify from '../utils/handleSpotify';
-
+import ArtistSelection from './ArtistSelection';
 
 const Spotify = () => {
 const dispatch = useDispatch()
 
+const [checkState,setCheckState] = useState({})
+const [boolean,setBoolean] = useState(false)
+ const dataCheck = useSelector((state) => state.spotify.value);
+// takes data from state useEffect to prevent to many re-render errors
+useEffect(()=>{
+ 
+  setCheckState(dataCheck)
+    return () => {
+      // Code to run on component unmount or when dataCheck changes
+      console.log("Cleanup logic executed");
+      // Add your cleanup logic here
+    
+
+    };
+},[dataCheck])
+
+//*Show artist T/F
+function showArtist() {
+  setBoolean((prevBoolean) => !prevBoolean);
+}
+
 
  async function startHandleSpotify(){
+    
     const spotifyData = await handleSpotify()
-    dispatch({type:'spotifyData',payload:spotifyData})
+    try{
+      dispatch(addSpotifyData({ type: "spotifyData", payload: spotifyData }));
+    }catch(e){
+      console.log(e)
+    }
+    
   }
   return (
     <>
@@ -28,6 +57,26 @@ const dispatch = useDispatch()
           </div>
         </div>
       </button>
+
+      {/* !! styling for all buttons */}
+      {/* Show buttons if there is data in spotify state */}
+
+      {
+        boolean? (<ArtistSelection/>):("")
+      }
+
+
+
+      {Object.keys(checkState).length > 0 ? (
+        <button
+          onClick={()=>showArtist()}
+          className="bg-gray-500 hover:bg-gray-700 text-white text-center py-2 px-4 rounded"
+        >
+          Show/Hide artist
+        </button>
+      ) : (
+        ""
+      )}
     </>
   );
 }
