@@ -34,6 +34,7 @@ function showArtist() {
  async function startHandleSpotify(){
     
     const spotifyData = await handleSpotify()
+    
     try{
       dispatch(addSpotifyData({ type: "spotifyData", payload: spotifyData }));
     }catch(e){
