@@ -2,7 +2,6 @@ const organizeSpotifyApi =async (data) => {
    let songArr = [];
  
 for (let i = 0; i < data.playlistName.length; i++) {
-  console.log(data.artist);
   let spotifyData = {
     playlist: {
       playlistName: data.playlistName[i],

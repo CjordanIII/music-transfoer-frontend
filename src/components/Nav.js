@@ -10,7 +10,6 @@ import Selecting from './Selecting';
 const Nav = () => {
     const spotifyData = useSelector((state) => state.spotify.value.payload);
     const [dataCheck,setDataCheck] = useState(null)
-    console.log(spotifyData)
    
   useEffect(()=>{
      setDataCheck(spotifyData);
