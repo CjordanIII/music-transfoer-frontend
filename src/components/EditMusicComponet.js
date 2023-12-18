@@ -1,7 +1,10 @@
 import { useFieldArray, useForm } from "react-hook-form";
-
+import { useDispatch, useSelector } from "react-redux";
+import {editSpotifyData} from '../slices/spotify'
 const EditMusicComponent = ({ props }) => {
-  const { playlistName, songsOnPlaylist } = props.playlist;
+  
+  const { playlistName, songsOnPlaylist } = props[0].playlist;
+  const indexObj = props[1]
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       playlistName,
@@ -18,10 +21,17 @@ const EditMusicComponent = ({ props }) => {
     control,
     name: "songs",
   });
-
+ const dispatch = useDispatch();
   const onSubmit = (data) => {
     // Handle form submission logic here
-    console.log(data);
+   
+    try{
+      dispatch(editSpotifyData({ type: "editSpotifyData", payload: [data, indexObj] }));
+
+    }catch(e){
+      console.log(e)
+    }
+    
   };
 
   return (

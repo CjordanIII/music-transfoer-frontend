@@ -6,13 +6,13 @@ const EditMusic = () => {
 
         const spotifyData = useSelector((state) => state.spotify.value.payload);
   const getPreFilledFormData = preFillFormData(spotifyData);
-
+  const { matchedData, index } = getPreFilledFormData;
     console.log(getPreFilledFormData)
 
   return (
     <div className="flex  justify-center">
       <div className="mt-32">
-        <EditMusicComponet props={getPreFilledFormData} />
+        <EditMusicComponet props={[matchedData,index]} />
       </div>
     </div>
   );

@@ -8,20 +8,20 @@ const preFillFormData = (spotifyData) => {
   const urlLength = urlArray.length - 1;
   const urlEnd = urlArray[urlLength];
   let matchedData;
-
+  let index;
 
 
   for (let data of spotifyData) {
     if (data.playlist.playlistName.split(" ").join("") === urlEnd) {
          matchedData = data;
+        index = spotifyData.indexOf(data)
         break;
     }
 
-    console.log(matchedData)
 
   }
 
-  return matchedData
+  return { matchedData, index };
 
   
 };
